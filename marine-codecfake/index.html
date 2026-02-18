@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Marine CodecFake - INTERSPEECH 2026</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MARINE CODECFAKE</h1>
+    <div class="subtitle">Submitted to INTERSPEECH 2026</div>
+
+    <div class="links">
+        Paper, Dataset, Code
+    </div>
+
+    <hr>
+
+   
+    <h3>Fake and Real Audio Samples</h3>
+    <p class="desc">
+        Each original marine mammal recording is paired with its codec-processed version.
+    </p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Codec Model Used</th>
+                    <th>Mammal Name</th>
+                    <th>Real Audio</th>
+                    <th>Fake Audio</th>
+                </tr>
+            </thead>
+            <tbody id="audioTable"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+
+const mammals = [
+"AtlanticSpottedDolphin","BeardedSeal","BelugaWhiteWhale",
+"BottlenoseDolphin","BowheadWhale","ClymeneDolphin",
+"CommonDolphin","FalseKillerWhale","FinFinbackWhale",
+"FrasersDolphin","GrampusRissosDolphin","HarpSeal",
+"HumpbackWhale","KillerWhale","LeopardSeal",
+"LongFinnedPilotWhale","MelonHeadedWhale","MinkeWhale",
+"Narwhal","NorthernRightWhale","PantropicalSpottedDolphin",
+"RossSeal","RoughToothedDolphin","ShortFinnedPacificPilotWhale",
+"SouthernRightWhale","SpermWhale","SpinnerDolphin",
+"StripedDolphin","Walrus","WeddellSeal",
+"WhitebeakedDolphin","WhitesidedDolphin"
+];
+
+const codecs = [
+    {name: "DAC_16kHz", suffix: "dac"},
+    {name: "SNAC_24kHz", suffix: "snac"},
+    {name: "SoundStream_24kHz", suffix: "soundstream"},
+    {name: "Encodec_24kHz", suffix: "encodec"}
+];
+
+const table = document.getElementById("audioTable");
+
+mammals.forEach(mammal => {
+    codecs.forEach(codec => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${codec.name}</td>
+            <td>${formatName(mammal)}</td>
+            <td><audio controls src="audio/${mammal}_real.wav"></audio></td>
+            <td><audio controls src="audio/${mammal}_${codec.suffix}.wav"></audio></td>
+        `;
+
+        table.appendChild(row);
+    });
+});
+
+function formatName(name) {
+    return name
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^ /, '');
+}
+
+</script>
+
+</body>
+</html>
