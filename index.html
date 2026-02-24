@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Marine CodecFake - INTERSPEECH 2026</title>
+    <title>ANIMAL CODECFAKE - INTERSPEECH 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -10,17 +10,19 @@
 
 <div class="container">
 
-    <h1>MARINE CODECFAKE</h1>
+    <h1>ANIMAL CODECFAKE</h1>
     <div class="subtitle">Submitted to INTERSPEECH 2026</div>
 
     <div class="links">
-        Paper, Dataset, Code
-    </div>
-
+    <a href="#" onclick="comingSoon(event)">Paper</a> |
+    <a href="#" onclick="comingSoon(event)">Dataset</a> |
+    <a href="#" onclick="comingSoon(event)">Code</a>
+</div>
     <hr>
 
-   
-    <h3>Fake and Real Audio Samples</h3>
+    <!-- ================= MARINE TABLE (UNCHANGED) ================= -->
+
+    <h3>Marine Animal Codec Samples</h3>
     <p class="desc">
         Each original marine mammal recording is paired with its codec-processed version.
     </p>
@@ -31,17 +33,47 @@
                 <tr>
                     <th>Codec Model Used</th>
                     <th>Mammal Name</th>
-                    <th>Real Audio</th>
-                    <th>Fake Audio</th>
+                    <th>GT Speech</th>
+                    <th>Generated Speech</th>
                 </tr>
             </thead>
             <tbody id="audioTable"></tbody>
         </table>
     </div>
 
+    <hr>
+
+    <!-- ================= TERRESTRIAL TABLE ================= -->
+
+    <h3>Terrestrial Animal Codec Samples</h3>
+    <p class="desc">
+        Each terrestrial animal recording is paired with one neural codec output.
+    </p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Codec Model Used</th>
+                    <th>Mammal Name</th>
+                    <th>GT Speech</th>
+                    <th>Generated Speech</th>
+                </tr>
+            </thead>
+            <tbody id="terrestrialTable"></tbody>
+        </table>
+    </div>
+
 </div>
 
 <script>
+
+    function comingSoon(event) {
+    event.preventDefault();
+    alert("Coming Soon ");
+}
+
+/* ================= MARINE SCRIPT (UNCHANGED) ================= */
 
 const mammals = [
 "AtlanticSpottedDolphin","BeardedSeal","BelugaWhiteWhale",
@@ -81,6 +113,40 @@ mammals.forEach(mammal => {
         table.appendChild(row);
     });
 });
+
+
+/* ================= TERRESTRIAL SCRIPT ================= */
+
+const terrestrialRows = [
+    {animal: "Lion", model: "DAC_16kHz", suffix: "dac"},
+    {animal: "Bear", model: "Encodec_24kHz", suffix: "encodec"},
+    {animal: "Cat", model: "SNAC_24kHz", suffix: "snac"},
+    {animal: "Chicken", model: "SoundStream_16kHz", suffix: "soundstream"},
+    {animal: "Cow", model: "DAC_16kHz", suffix: "dac"},
+    {animal: "Dog", model: "Encodec_24kHz", suffix: "encodec"},
+    {animal: "Donkey", model: "SNAC_24kHz", suffix: "snac"},
+    {animal: "Elephant", model: "SoundStream_16kHz", suffix: "soundstream"},
+    {animal: "Horse", model: "DAC_16kHz", suffix: "dac"},
+    {animal: "Monkey", model: "Encodec_24kHz", suffix: "encodec"},
+    {animal: "Sheep", model: "SNAC_24kHz", suffix: "snac"}
+];
+
+const terrestrialTable = document.getElementById("terrestrialTable");
+
+terrestrialRows.forEach(item => {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${item.model}</td>
+        <td>${item.animal}</td>
+        <td><audio controls src="terrestrial_audio/${item.animal}_real.wav"></audio></td>
+        <td><audio controls src="terrestrial_audio/${item.animal}_${item.suffix}.wav"></audio></td>
+    `;
+
+    terrestrialTable.appendChild(row);
+});
+
 
 function formatName(name) {
     return name
