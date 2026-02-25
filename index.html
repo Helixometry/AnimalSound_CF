@@ -21,7 +21,7 @@
 
     <hr>
 
-    <!-- ================= MARINE TABLE (UNCHANGED STRUCTURE) ================= -->
+    <!-- ================= MARINE TABLE ================= -->
 
     <h3>Marine Animal Codec Samples</h3>
     <p class="desc">
@@ -107,14 +107,21 @@ mammals.forEach(mammal => {
         row.innerHTML = `
             <td>${codec.name}</td>
             <td>${formatName(mammal)}</td>
-            <td><audio controls src="marine_audio/${mammal}_real.wav"></audio></td>
-            <td><audio controls src="marine_audio/${mammal}_${codec.suffix}.wav"></audio></td>
+            <td>
+                <audio controls preload="none">
+                    <source src="marine_audio/${mammal}_real.wav" type="audio/wav">
+                </audio>
+            </td>
+            <td>
+                <audio controls preload="none">
+                    <source src="marine_audio/${mammal}_${codec.suffix}.wav" type="audio/wav">
+                </audio>
+            </td>
         `;
 
         table.appendChild(row);
     });
 });
-
 
 /* ================= TERRESTRIAL SCRIPT ================= */
 
@@ -141,8 +148,16 @@ terrestrialRows.forEach(item => {
     row.innerHTML = `
         <td>${item.model}</td>
         <td>${item.animal}</td>
-        <td><audio controls src="terrestrial_audio/${item.animal}_real.wav"></audio></td>
-        <td><audio controls src="terrestrial_audio/${item.animal}_${item.suffix}.wav"></audio></td>
+        <td>
+            <audio controls preload="none">
+                <source src="terrestrial_audio/${item.animal}_real.wav" type="audio/wav">
+            </audio>
+        </td>
+        <td>
+            <audio controls preload="none">
+                <source src="terrestrial_audio/${item.animal}_${item.suffix}.wav" type="audio/wav">
+            </audio>
+        </td>
     `;
 
     terrestrialTable.appendChild(row);
