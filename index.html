@@ -14,13 +14,14 @@
     <div class="subtitle">Submitted to INTERSPEECH 2026</div>
 
     <div class="links">
-    <a href="#" onclick="comingSoon(event)">Paper</a> |
-    <a href="#" onclick="comingSoon(event)">Dataset</a> |
-    <a href="#" onclick="comingSoon(event)">Code</a>
-</div>
+        <a href="#" onclick="comingSoon(event)">Paper</a> |
+        <a href="#" onclick="comingSoon(event)">Dataset</a> |
+        <a href="#" onclick="comingSoon(event)">Code</a>
+    </div>
+
     <hr>
 
-    <!-- ================= MARINE TABLE (UNCHANGED) ================= -->
+    <!-- ================= MARINE TABLE (UNCHANGED STRUCTURE) ================= -->
 
     <h3>Marine Animal Codec Samples</h3>
     <p class="desc">
@@ -68,12 +69,12 @@
 
 <script>
 
-    function comingSoon(event) {
+function comingSoon(event) {
     event.preventDefault();
-    alert("Coming Soon ");
+    alert("Coming Soon");
 }
 
-/* ================= MARINE SCRIPT (UNCHANGED) ================= */
+/* ================= MARINE SCRIPT ================= */
 
 const mammals = [
 "AtlanticSpottedDolphin","BeardedSeal","BelugaWhiteWhale",
@@ -106,8 +107,8 @@ mammals.forEach(mammal => {
         row.innerHTML = `
             <td>${codec.name}</td>
             <td>${formatName(mammal)}</td>
-            <td><audio controls src="audio/${mammal}_real.wav"></audio></td>
-            <td><audio controls src="audio/${mammal}_${codec.suffix}.wav"></audio></td>
+            <td><audio controls src="marine_audio/${mammal}_real.wav"></audio></td>
+            <td><audio controls src="marine_audio/${mammal}_${codec.suffix}.wav"></audio></td>
         `;
 
         table.appendChild(row);
@@ -146,7 +147,6 @@ terrestrialRows.forEach(item => {
 
     terrestrialTable.appendChild(row);
 });
-
 
 function formatName(name) {
     return name
