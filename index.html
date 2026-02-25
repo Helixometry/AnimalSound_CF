@@ -33,9 +33,9 @@
             <thead>
                 <tr>
                     <th>Codec Model Used</th>
-                    <th>Mammal Name</th>
-                    <th>GT Speech</th>
-                    <th>Generated Speech</th>
+                    <th>Animal Name</th>
+                    <th>GT Audio</th>
+                    <th>Codec Output</th>
                 </tr>
             </thead>
             <tbody id="audioTable"></tbody>
@@ -56,9 +56,9 @@
             <thead>
                 <tr>
                     <th>Codec Model Used</th>
-                    <th>Mammal Name</th>
-                    <th>GT Speech</th>
-                    <th>Generated Speech</th>
+                    <th>Animal Name</th>
+                    <th>GT Audio</th>
+                    <th>Codec Output</th>
                 </tr>
             </thead>
             <tbody id="terrestrialTable"></tbody>
@@ -74,56 +74,46 @@ function comingSoon(event) {
     alert("Coming Soon");
 }
 
-/* ================= MARINE SCRIPT ================= */
+/* ================= MARINE (10 TOTAL) ================= */
 
-const mammals = [
-"AtlanticSpottedDolphin","BeardedSeal","BelugaWhiteWhale",
-"BottlenoseDolphin","BowheadWhale","ClymeneDolphin",
-"CommonDolphin","FalseKillerWhale","FinFinbackWhale",
-"FrasersDolphin","GrampusRissosDolphin","HarpSeal",
-"HumpbackWhale","KillerWhale","LeopardSeal",
-"LongFinnedPilotWhale","MelonHeadedWhale","MinkeWhale",
-"Narwhal","NorthernRightWhale","PantropicalSpottedDolphin",
-"RossSeal","RoughToothedDolphin","ShortFinnedPacificPilotWhale",
-"SouthernRightWhale","SpermWhale","SpinnerDolphin",
-"StripedDolphin","Walrus","WeddellSeal",
-"WhitebeakedDolphin","WhitesidedDolphin"
+const marineRows = [
+    {animal: "AtlanticSpottedDolphin", model: "DAC_16kHz", suffix: "dac"},
+    {animal: "BelugaWhiteWhale", model: "SNAC_24kHz", suffix: "snac"},
+    {animal: "BottlenoseDolphin", model: "SoundStream_24kHz", suffix: "soundstream"},
+    {animal: "CommonDolphin", model: "Encodec_24kHz", suffix: "encodec"},
+    {animal: "HumpbackWhale", model: "DAC_16kHz", suffix: "dac"},
+    {animal: "KillerWhale", model: "SNAC_24kHz", suffix: "snac"},
+    {animal: "MinkeWhale", model: "SoundStream_24kHz", suffix: "soundstream"},
+    {animal: "SpermWhale", model: "Encodec_24kHz", suffix: "encodec"},
+    {animal: "SpinnerDolphin", model: "DAC_16kHz", suffix: "dac"},
+    {animal: "Walrus", model: "Encodec_24kHz", suffix: "encodec"}
 ];
 
-const codecs = [
-    {name: "DAC_16kHz", suffix: "dac"},
-    {name: "SNAC_24kHz", suffix: "snac"},
-    {name: "SoundStream_24kHz", suffix: "soundstream"},
-    {name: "Encodec_24kHz", suffix: "encodec"}
-];
+const marineTable = document.getElementById("audioTable");
 
-const table = document.getElementById("audioTable");
+marineRows.forEach(item => {
 
-mammals.forEach(mammal => {
-    codecs.forEach(codec => {
+    const row = document.createElement("tr");
 
-        const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${item.model}</td>
+        <td>${formatName(item.animal)}</td>
+        <td>
+            <audio controls preload="none">
+                <source src="marine_audio/${item.animal}_real.wav" type="audio/wav">
+            </audio>
+        </td>
+        <td>
+            <audio controls preload="none">
+                <source src="marine_audio/${item.animal}_${item.suffix}.wav" type="audio/wav">
+            </audio>
+        </td>
+    `;
 
-        row.innerHTML = `
-            <td>${codec.name}</td>
-            <td>${formatName(mammal)}</td>
-            <td>
-                <audio controls preload="none">
-                    <source src="marine_audio/${mammal}_real.wav" type="audio/wav">
-                </audio>
-            </td>
-            <td>
-                <audio controls preload="none">
-                    <source src="marine_audio/${mammal}_${codec.suffix}.wav" type="audio/wav">
-                </audio>
-            </td>
-        `;
-
-        table.appendChild(row);
-    });
+    marineTable.appendChild(row);
 });
 
-/* ================= TERRESTRIAL SCRIPT ================= */
+/* ================= TERRESTRIAL (10 TOTAL) ================= */
 
 const terrestrialRows = [
     {animal: "Lion", model: "DAC_16kHz", suffix: "dac"},
@@ -135,7 +125,6 @@ const terrestrialRows = [
     {animal: "Donkey", model: "SNAC_24kHz", suffix: "snac"},
     {animal: "Elephant", model: "SoundStream_16kHz", suffix: "soundstream"},
     {animal: "Horse", model: "DAC_16kHz", suffix: "dac"},
-    {animal: "Monkey", model: "Encodec_24kHz", suffix: "encodec"},
     {animal: "Sheep", model: "SNAC_24kHz", suffix: "snac"}
 ];
 
